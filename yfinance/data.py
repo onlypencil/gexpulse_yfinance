@@ -67,15 +67,16 @@ class YfData(metaclass=SingletonMeta):
     def __init__(self, session=None):
         self._crumb = None
         self._cookie = None
-
+    
         # Default to using 'basic' strategy
         self._cookie_strategy = 'basic'
         # If it fails, then fallback method is 'csrf'
         # self._cookie_strategy = 'csrf'
-
+    
         self._cookie_lock = threading.Lock()
-
-        self._set_session(session or requests.Session())
+    
+        # Use the provided session or create a new one with impersonate="chrome"
+        self._set_session(session or requests.Session(impersonate="chrome"))
 
     def _set_session(self, session):
         if session is None:
