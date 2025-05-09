@@ -75,8 +75,7 @@ class YfData(metaclass=SingletonMeta):
     
         self._cookie_lock = threading.Lock()
     
-        # Use the provided session or create a new one with impersonate="chrome"
-        self._set_session(session or requests.Session(impersonate="chrome"))
+        self._set_session(session or requests.Session())
 
     def _set_session(self, session):
         if session is None:
